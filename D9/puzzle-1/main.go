@@ -35,6 +35,7 @@ func main() {
 
 	for _, move := range moves {
 		for i := 0; i < move.moveCount; i++ {
+			// Move head
 			headCoord = incrementCoords(headCoord, move.direction)
 
 			// Move tail
