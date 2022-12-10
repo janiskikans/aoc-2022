@@ -43,7 +43,7 @@ func main() {
 }
 
 func draw(registerX int, pixelPosition int) {
-	pixelPosition = pixelPosition % 40 // Spire can only move on the available 40 pixel width of the display
+	pixelPosition = pixelPosition % 40 // Sprite can only move on the available 40 pixel width of the display
 	spriteCenter := registerX
 
 	if pixelPosition%40 == 0 {
