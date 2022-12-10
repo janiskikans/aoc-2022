@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"log"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -21,35 +22,38 @@ func main() {
 	input := getInputAsSlice()
 	instructionSet := parseInstructions(input)
 
-	signalStrengthSum, xRegister, cycleCounter := 0, 1, 0
+	xRegister, cycleCounter := 1, 0
 
 	for _, instruction := range instructionSet {
-		if cycleCounter > 220 {
-			break
-		}
-
 		if instruction.isAddx() {
+			draw(xRegister, cycleCounter)
 			cycleCounter++
-			incrementSignalStrength(&signalStrengthSum, xRegister, cycleCounter)
 
+			draw(xRegister, cycleCounter)
 			cycleCounter++
-			incrementSignalStrength(&signalStrengthSum, xRegister, cycleCounter)
 
 			xRegister += instruction.value
 
 			continue
 		}
 
+		draw(xRegister, cycleCounter)
 		cycleCounter++
-		incrementSignalStrength(&signalStrengthSum, xRegister, cycleCounter)
 	}
-
-	fmt.Println("Signal strength sum", signalStrengthSum)
 }
 
-func incrementSignalStrength(strengthSum *int, xRegister int, cycleCounter int) {
-	if (cycleCounter-20)%40 == 0 {
-		*strengthSum += xRegister * cycleCounter
+func draw(registerX int, pixelPosition int) {
+	pixelPosition = pixelPosition % 40 // Spire can only move on the available 40 pixel width of the display
+	spriteCenter := registerX
+
+	if pixelPosition%40 == 0 {
+		fmt.Println() // Display is 40 pixels wide, so go to the next CRT line here
+	}
+
+	if math.Abs(float64(spriteCenter)-float64(pixelPosition)) <= 1 {
+		fmt.Print("#") // Lit pixel
+	} else {
+		fmt.Print(".") // Dark pixel
 	}
 }
 
