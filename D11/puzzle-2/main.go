@@ -34,15 +34,10 @@ type Monkey struct {
 func main() {
 	monkeys := buildMonkeys()
 
-	// We can use greatest common divisor to manage stress levels
-	// The idea is to divide each item by GCD now instead of 3 as we did before
-	gratestCommonDivisor := 1
-	highestDivisionOperand := 0
+	divisor := 1
 	for _, monkey := range monkeys {
-		gratestCommonDivisor = gratestCommonDivisor * monkey.test.divisionOperand
+		divisor = divisor * monkey.test.divisionOperand
 	}
-
-	fmt.Println(gratestCommonDivisor, highestDivisionOperand)
 
 	for round := 1; round <= 10_000; round++ {
 		fmt.Println("______ ROUND", round, "_______")
@@ -62,7 +57,7 @@ func main() {
 					toMonkey = &monkeys[monkey.test.falsyTargetId]
 				}
 
-				toMonkey.items = append(toMonkey.items, item%gratestCommonDivisor)
+				toMonkey.items = append(toMonkey.items, item%divisor)
 			}
 
 			monkey.items = []int{}
