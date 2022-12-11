@@ -34,7 +34,7 @@ type Monkey struct {
 func main() {
 	monkeys := buildMonkeys()
 
-	divisor := 1
+	divisor := 1 // least common multiple
 	for _, monkey := range monkeys {
 		divisor = divisor * monkey.test.divisionOperand
 	}
@@ -106,13 +106,6 @@ func getOperand(item int, operand string) int {
 }
 
 func buildMonkeys() []Monkey {
-	// return []Monkey{
-	// 	{0, []int{79, 98}, Operation{OPERATION_MULTIPLY, OPERATION_ARG_OLD, "19"}, Test{23, 2, 3}, 0},
-	// 	{1, []int{54, 65, 75, 74}, Operation{OPERATION_PLUS, OPERATION_ARG_OLD, "6"}, Test{19, 2, 0}, 0},
-	// 	{2, []int{79, 60, 97}, Operation{OPERATION_MULTIPLY, OPERATION_ARG_OLD, OPERATION_ARG_OLD}, Test{13, 1, 3}, 0},
-	// 	{3, []int{74}, Operation{OPERATION_PLUS, OPERATION_ARG_OLD, "3"}, Test{17, 0, 1}, 0},
-	// }
-
 	return []Monkey{
 		{0, []int{83, 88, 96, 79, 86, 88, 70}, Operation{OPERATION_MULTIPLY, OPERATION_ARG_OLD, "5"}, Test{11, 2, 3}, 0},
 		{1, []int{59, 63, 98, 85, 68, 72}, Operation{OPERATION_MULTIPLY, OPERATION_ARG_OLD, "11"}, Test{5, 4, 0}, 0},
